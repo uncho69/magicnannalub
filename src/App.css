@@ -80,6 +80,25 @@
   height: 32px;
 }
 
+.email-wrapper {
+  text-align: center;
+  margin-top: 1.5rem;
+  animation: fadeIn 1.35s ease-in 0.35s both;
+}
+
+.email-link {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.6rem;
+  color: #1a1a1a;
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  transition: opacity 0.2s ease;
+}
+
+.email-link:hover {
+  opacity: 0.6;
+}
+
 .description-section {
   width: 100%;
   animation: fadeIn 1.5s ease-in 0.5s both;
@@ -120,9 +139,7 @@
 
 .description-text .text-link {
   color: #2563eb;
-  text-decoration: underline;
-  text-decoration-thickness: 2px;
-  text-underline-offset: 3px;
+  text-decoration: none;
   transition: opacity 0.2s ease;
 }
 
@@ -177,6 +194,14 @@
     height: 28px;
   }
   
+  .email-wrapper {
+    margin-top: 1rem;
+  }
+  
+  .email-link {
+    font-size: 0.5rem;
+  }
+  
   .description-wrapper {
     padding: 0 1.5rem;
   }
@@ -222,6 +247,10 @@
   .icon {
     width: 24px;
     height: 24px;
+  }
+  
+  .email-link {
+    font-size: 0.45rem;
   }
   
   .description-wrapper {

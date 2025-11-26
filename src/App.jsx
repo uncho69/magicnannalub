@@ -18,6 +18,10 @@ function App() {
               </svg>
             </a>
           </div>
+          
+          <div className="email-wrapper">
+            <a href="mailto:magicnannastudio@protonmail.com" className="email-link">magicnannastudio@protonmail.com</a>
+          </div>
         </div>
         
         <div className="description-section">
@@ -27,8 +31,6 @@ function App() {
               Magic Nanna Labs (MNL) has produced video content for leading <a href="https://x.com/berachain" target="_blank" rel="noopener noreferrer" className="text-link">Berachain</a> projects, delivering visuals that stand out and leave a mark. Our creative approach is never confined — we don't stick to a single style, formula, or direction. We create freely, wildly, and instinctively.
               <br /><br />
               Just like a legendary Nonna in the kitchen, we mix unexpected ingredients, stir ideas with intuition, and serve bangers that nobody sees coming. Our work blends cinematic video production with cutting-edge AI, custom visual tools, and even original sound and music creation, all crafted in-house.
-              <br /><br />
-              This is where experimentation meets taste. We let ideas simmer, add flavor, and shape every project by hand. Nothing stiff, nothing recycled, just bold work that feels alive. At Magic Nanna Labs, the pot never stops boiling, and the results are always crazy good.
             </p>
           </div>
           <div className="description-border-bottom"></div>
