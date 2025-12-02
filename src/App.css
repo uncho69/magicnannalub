@@ -99,6 +99,45 @@
   opacity: 0.6;
 }
 
+.partner-strip {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.5rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #1a1a1a;
+  opacity: 0.85;
+  animation: fadeIn 1.4s ease-in 0.4s both;
+}
+
+.partner-label {
+  white-space: nowrap;
+}
+
+.partner-logo {
+  height: 28px;
+  width: 28px;
+  border-radius: 999px;
+  object-fit: cover;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+.partner-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.partner-link:hover {
+  transform: scale(1.05);
+  opacity: 0.8;
+}
+
 .description-section {
   width: 100%;
   animation: fadeIn 1.5s ease-in 0.5s both;
@@ -145,6 +184,27 @@
 
 .description-text .text-link:hover {
   opacity: 0.7;
+}
+
+.description-text strong {
+  font-weight: bold;
+  color: #1a1a1a;
+}
+
+.remember-wrapper {
+  text-align: center;
+  margin-top: 2rem;
+  animation: fadeIn 1.55s ease-in 0.55s both;
+}
+
+.remember-text {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.7rem;
+  line-height: 2;
+  color: #1a1a1a;
+  margin: 0;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 .tagline-wrapper {
@@ -202,6 +262,17 @@
     font-size: 0.5rem;
   }
   
+  .partner-strip {
+    margin-top: 0.75rem;
+    gap: 0.5rem;
+    font-size: 0.45rem;
+  }
+
+  .partner-logo {
+    height: 24px;
+    width: 24px;
+  }
+
   .description-wrapper {
     padding: 0 1.5rem;
   }
@@ -217,6 +288,14 @@
   .description-text {
     font-size: 0.5rem;
     line-height: 1.8;
+  }
+  
+  .remember-wrapper {
+    margin-top: 1.5rem;
+  }
+  
+  .remember-text {
+    font-size: 0.6rem;
   }
   
   .tagline-wrapper {
@@ -253,6 +332,18 @@
     font-size: 0.45rem;
   }
   
+  .partner-strip {
+    margin-top: 0.5rem;
+    gap: 0.4rem;
+    font-size: 0.4rem;
+    flex-wrap: wrap;
+  }
+
+  .partner-logo {
+    height: 22px;
+    width: 22px;
+  }
+
   .description-wrapper {
     padding: 0 1rem;
   }
@@ -268,6 +359,10 @@
   .description-text {
     font-size: 0.45rem;
     line-height: 1.7;
+  }
+  
+  .remember-text {
+    font-size: 0.5rem;
   }
   
   .tagline-text {

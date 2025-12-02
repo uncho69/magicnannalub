@@ -1,5 +1,6 @@
 import './App.css'
 import logo from './assets/logo.png'
+import partnerLogo from './assets/partner-logo.jpg'
 
 function App() {
   return (
@@ -22,18 +23,46 @@ function App() {
           <div className="email-wrapper">
             <a href="mailto:magicnannastudio@protonmail.com" className="email-link">magicnannastudio@protonmail.com</a>
           </div>
+
+          <div className="partner-strip">
+            <span className="partner-label">Official partner of</span>
+            <a
+              href="https://x.com/Liquidmintxyz"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="partner-link"
+            >
+              <img
+                src={partnerLogo}
+                alt="Official partner: Liquidmint"
+                className="partner-logo"
+              />
+            </a>
+          </div>
         </div>
         
         <div className="description-section">
           <div className="description-border-top"></div>
           <div className="description-wrapper">
             <p className="description-text">
-              Magic Nanna Labs (MNL) has produced video content for leading <a href="https://x.com/berachain" target="_blank" rel="noopener noreferrer" className="text-link">Berachain</a> projects, delivering visuals that stand out and leave a mark. Our creative approach is never confined — we don't stick to a single style, formula, or direction. We create freely, wildly, and instinctively.
+              Magic Nanna Labs team members have been cooking on the internet long before AI hype cycles and viral threads. We're children of early web culture, self-taught, over-skilled, and battle-tested by years of creating and experimenting.
               <br /><br />
-              Just like a legendary Nonna in the kitchen, we mix unexpected ingredients, stir ideas with intuition, and serve bangers that nobody sees coming. Our work blends cinematic video production with cutting-edge AI, custom visual tools, and even original sound and music creation, all crafted in-house.
+              Along the way, we've crafted video content for leading <a href="https://x.com/berachain" target="_blank" rel="noopener noreferrer" className="text-link">Berachain</a> projects, delivering visuals that hit hard and stand out across the ecosystem.
+              <br /><br />
+              <strong>We don't follow templates. We don't recycle styles</strong> Everything we make is crafted from scratch with intention — visuals, edits, animations, SFX, music, pacing, storytelling.
+              <br /><br />
+              If it's on screen, we shaped it. If it's heard, we designed it. Full control, A to Z.
+              <br /><br />
+              Like a legendary Nanna in the kitchen, we mix intuition with technical mastery, stirring ideas until they hit that perfect flavor.
+              <br /><br />
+              Our studio blends cinematic video production, cutting-edge AI, custom tooling, and original sound design crafted in-house by our producers.
             </p>
           </div>
           <div className="description-border-bottom"></div>
+        </div>
+        
+        <div className="remember-wrapper">
+          <p className="remember-text">AND REMEMBER</p>
         </div>
         
         <div className="tagline-wrapper">
