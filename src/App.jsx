@@ -26,31 +26,33 @@ function App() {
           </div>
 
           <div className="partner-strip">
-            <span className="partner-label">Official partner of</span>
-            <a
-              href="https://x.com/Liquidmintxyz"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="partner-link"
-            >
-              <img
-                src={partnerLogo}
-                alt="Official partner: Liquidmint"
-                className="partner-logo"
-              />
-            </a>
-            <a
-              href="https://x.com/DADstudioxyz"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="partner-link"
-            >
-              <img
-                src={partnerLogoDad}
-                alt="Official partner: DAD Studio"
-                className="partner-logo"
-              />
-            </a>
+            <span className="partner-label">Official Partners</span>
+            <div className="partner-logos">
+              <a
+                href="https://x.com/Liquidmintxyz"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="partner-link"
+              >
+                <img
+                  src={partnerLogo}
+                  alt="Official partner: Liquidmint"
+                  className="partner-logo"
+                />
+              </a>
+              <a
+                href="https://x.com/DADstudioxyz"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="partner-link"
+              >
+                <img
+                  src={partnerLogoDad}
+                  alt="Official partner: DAD Studio"
+                  className="partner-logo"
+                />
+              </a>
+            </div>
           </div>
         </div>
         

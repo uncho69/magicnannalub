@@ -102,9 +102,10 @@
 .partner-strip {
   margin-top: 1rem;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.75rem;
+  gap: 0.5rem;
   font-family: 'Press Start 2P', monospace;
   font-size: 0.5rem;
   letter-spacing: 0.08em;
@@ -116,6 +117,13 @@
 
 .partner-label {
   white-space: nowrap;
+}
+
+.partner-logos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
 }
 
 .partner-logo {
@@ -264,8 +272,12 @@
   
   .partner-strip {
     margin-top: 0.75rem;
-    gap: 0.5rem;
+    gap: 0.4rem;
     font-size: 0.45rem;
+  }
+
+  .partner-logos {
+    gap: 0.6rem;
   }
 
   .partner-logo {
@@ -334,8 +346,12 @@
   
   .partner-strip {
     margin-top: 0.5rem;
-    gap: 0.4rem;
+    gap: 0.3rem;
     font-size: 0.4rem;
+  }
+
+  .partner-logos {
+    gap: 0.5rem;
     flex-wrap: wrap;
   }
 
