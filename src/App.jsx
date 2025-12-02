@@ -1,6 +1,7 @@
 import './App.css'
 import logo from './assets/logo.png'
 import partnerLogo from './assets/partner-logo.jpg'
+import partnerLogoDad from './assets/partner-logo-dad.png'
 
 function App() {
   return (
@@ -35,6 +36,18 @@ function App() {
               <img
                 src={partnerLogo}
                 alt="Official partner: Liquidmint"
+                className="partner-logo"
+              />
+            </a>
+            <a
+              href="https://x.com/DADstudioxyz"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="partner-link"
+            >
+              <img
+                src={partnerLogoDad}
+                alt="Official partner: DAD Studio"
                 className="partner-logo"
               />
             </a>
