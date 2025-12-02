@@ -2,6 +2,7 @@ import './App.css'
 import logo from './assets/logo.png'
 import partnerLogo from './assets/partner-logo.jpg'
 import partnerLogoDad from './assets/partner-logo-dad.png'
+import partnerLogoShrmz from './assets/official-partner-shrmz.jpg'
 
 function App() {
   return (
@@ -49,6 +50,18 @@ function App() {
                 <img
                   src={partnerLogoDad}
                   alt="Official partner: DAD Studio"
+                  className="partner-logo"
+                />
+              </a>
+              <a
+                href="https://x.com/ShroomiezNFTs"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="partner-link"
+              >
+                <img
+                  src={partnerLogoShrmz}
+                  alt="Official partner: Shroomiez"
                   className="partner-logo"
                 />
               </a>
