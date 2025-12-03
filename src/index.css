@@ -9,11 +9,14 @@ body {
   font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #ffffff;
+  background-color: transparent;
+  background: transparent;
   color: #1a1a1a;
 }
 
 #root {
   width: 100%;
   min-height: 100vh;
+  background-color: transparent;
+  background: transparent;
 }
