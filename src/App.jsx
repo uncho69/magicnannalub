@@ -13,57 +13,68 @@ function App() {
     const video = videoRef.current
     if (!video) return
 
-    // Imposta video come muto PRIMA di tutto - CRITICO per autoplay su mobile
+    // Video sempre muto, senza audio
     video.muted = true
     video.volume = 0
-    video.setAttribute('muted', '')
-    video.removeAttribute('controls')
+    
+    // Debug: log quando il video si carica
+    video.addEventListener('loadedmetadata', () => {
+      console.log('Video metadata loaded, duration:', video.duration)
+    })
+    
+    video.addEventListener('canplay', () => {
+      console.log('Video can play')
+    })
+    
+    video.addEventListener('playing', () => {
+      console.log('Video is playing!')
+    })
     
     const forcePlay = async () => {
       if (video.paused) {
         try {
-          // Assicurati che sia muto prima di play
-          video.muted = true
-          video.volume = 0
-          video.setAttribute('muted', '')
           await video.play()
+          console.log('Video play() succeeded')
         } catch (error) {
           console.error('Video play() failed:', error)
+          // Riprova se fallisce
+          setTimeout(forcePlay, 200)
         }
       }
     }
     
-    // Prova quando il video è pronto
-    const tryPlay = () => {
-      video.muted = true
-      video.volume = 0
-      video.setAttribute('muted', '')
-      forcePlay()
-    }
+    // Prova immediatamente
+    forcePlay()
     
-    // Eventi per avviare il video quando è pronto
+    // Retry continuo ogni 500ms se è ancora in pausa
+    const retryInterval = setInterval(() => {
+      if (video.paused) {
+        forcePlay()
+      }
+    }, 500)
+    
+    // Prova quando è pronto
+    const tryPlay = () => forcePlay()
     video.addEventListener('loadeddata', tryPlay)
     video.addEventListener('canplay', tryPlay)
     video.addEventListener('canplaythrough', tryPlay)
-    video.addEventListener('loadedmetadata', tryPlay)
-    
-    // Prova immediatamente
-    tryPlay()
-    
-    // Retry continuo ogni 200ms se è ancora in pausa
-    const retryInterval = setInterval(() => {
-      if (video.paused) {
-        tryPlay()
-      }
-    }, 200)
     
     // Quando la pagina diventa visibile, riprova
     const handleVisibilityChange = () => {
       if (!document.hidden && video.paused) {
-        tryPlay()
+        forcePlay()
       }
     }
     document.addEventListener('visibilitychange', handleVisibilityChange)
+    
+    // Click globale per sbloccare
+    const unlock = () => {
+      if (video.paused) {
+        forcePlay()
+      }
+    }
+    document.addEventListener('click', unlock, { once: true })
+    document.addEventListener('touchstart', unlock, { once: true })
     
     // Cleanup
     return () => {
@@ -71,7 +82,6 @@ function App() {
       video.removeEventListener('loadeddata', tryPlay)
       video.removeEventListener('canplay', tryPlay)
       video.removeEventListener('canplaythrough', tryPlay)
-      video.removeEventListener('loadedmetadata', tryPlay)
       document.removeEventListener('visibilitychange', handleVisibilityChange)
     }
   }, [])
@@ -90,27 +100,19 @@ function App() {
         playsInline
         preload="auto"
         muted
-        controls={false}
-        disablePictureInPicture
-        controlsList="nodownload nofullscreen noremoteplayback"
         webkit-playsinline="true"
         x5-playsinline="true"
         onLoadedData={(e) => {
-          e.target.muted = true
-          e.target.volume = 0
-          e.target.setAttribute('muted', '')
-          e.target.removeAttribute('controls')
           e.target.play().catch(() => {})
         }}
         onCanPlay={(e) => {
-          e.target.muted = true
-          e.target.volume = 0
-          e.target.setAttribute('muted', '')
-          e.target.removeAttribute('controls')
           e.target.play().catch(() => {})
         }}
         onError={(e) => {
           console.error('Video error:', e.target.error)
+        }}
+        onLoadStart={() => {
+          console.log('Video loading started')
         }}
       >
         Your browser does not support the video tag.
