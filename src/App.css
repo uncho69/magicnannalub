@@ -27,20 +27,29 @@
   pointer-events: none;
 }
 
-.app-overlay {
-  display: none;
+/* Nascondi completamente i controlli del video */
+.background-video::-webkit-media-controls {
+  display: none !important;
 }
 
-.video-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 999;
-  background: transparent;
-  cursor: pointer;
-  touch-action: manipulation;
+.background-video::-webkit-media-controls-enclosure {
+  display: none !important;
+}
+
+.background-video::-webkit-media-controls-panel {
+  display: none !important;
+}
+
+.background-video::-webkit-media-controls-play-button {
+  display: none !important;
+}
+
+.background-video::-webkit-media-controls-start-playback-button {
+  display: none !important;
+}
+
+.app-overlay {
+  display: none;
 }
 
 .main-header {
