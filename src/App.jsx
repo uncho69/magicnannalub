@@ -86,12 +86,15 @@ function App() {
     }
   }, [])
 
+  // URL del video su Cloudflare R2
+  const videoUrl = 'https://pub-40c99f2d54fd492fbef50adca7fecc1b.r2.dev/promo1.mp4'
+
   return (
     <div className="app">
       <video
         ref={videoRef}
         className="background-video"
-        src="/promo1.mp4"
+        src={videoUrl}
         autoPlay
         loop
         playsInline
