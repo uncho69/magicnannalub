@@ -3,6 +3,7 @@ import './App.css'
 import partnerLogo from './assets/partner-logo.jpg'
 import partnerLogoDad from './assets/partner-logo-dad.png'
 import partnerLogoShrmz from './assets/official-partner-shrmz.jpg'
+import nannaLogo from './assets/nobg.png'
 
 function App() {
   const [showAbout, setShowAbout] = useState(false)
@@ -12,45 +13,18 @@ function App() {
     const video = videoRef.current
     if (!video) return
 
-    video.volume = 1.0
+    // Video sempre muto, senza audio
     video.muted = true
-    
-    let unmuteAttempted = false
-    
-    const unmuteVideo = () => {
-      if (!unmuteAttempted && !video.muted) {
-        return // Già unmuted
-      }
-      
-      if (video.paused) {
-        return // Non può unmute se non sta riproducendo
-      }
-      
-      try {
-        video.muted = false
-        unmuteAttempted = true
-      } catch (e) {
-        // Riprova
-        setTimeout(unmuteVideo, 50)
-      }
-    }
+    video.volume = 0
     
     const forcePlay = async () => {
-      if (!video.paused) {
-        // Se già in play, prova a unmute
-        unmuteVideo()
-        return
-      }
-      
-      try {
-        await video.play()
-        // Una volta partito, prova a unmute immediatamente
-        setTimeout(() => {
-          unmuteVideo()
-        }, 50)
-      } catch (error) {
-        // Riprova continuamente
-        setTimeout(forcePlay, 200)
+      if (video.paused) {
+        try {
+          await video.play()
+        } catch (error) {
+          // Riprova se fallisce
+          setTimeout(forcePlay, 200)
+        }
       }
     }
     
@@ -61,8 +35,6 @@ function App() {
     const retryInterval = setInterval(() => {
       if (video.paused) {
         forcePlay()
-      } else if (video.muted) {
-        unmuteVideo()
       }
     }, 500)
     
@@ -71,10 +43,6 @@ function App() {
     video.addEventListener('loadeddata', tryPlay)
     video.addEventListener('canplay', tryPlay)
     video.addEventListener('canplaythrough', tryPlay)
-    video.addEventListener('playing', () => {
-      // Quando inizia a riprodurre, unmute
-      setTimeout(unmuteVideo, 100)
-    })
     
     // Quando la pagina diventa visibile, riprova
     const handleVisibilityChange = () => {
@@ -88,8 +56,6 @@ function App() {
     const unlock = () => {
       if (video.paused) {
         forcePlay()
-      } else if (video.muted) {
-        unmuteVideo()
       }
     }
     document.addEventListener('click', unlock, { once: true })
@@ -134,6 +100,10 @@ function App() {
         >
           {showAbout ? 'CLOSE' : 'ABOUT'}
         </button>
+      </div>
+
+      <div className="center-title">
+        <img src={nannaLogo} alt="Magic Nanna Labs" className="nanna-logo" />
       </div>
 
       {showAbout && (
