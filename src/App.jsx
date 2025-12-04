@@ -90,6 +90,12 @@ function App() {
         onCanPlay={(e) => {
           e.target.play().catch(() => {})
         }}
+        onError={(e) => {
+          console.error('Video error:', e.target.error)
+        }}
+        onLoadStart={() => {
+          console.log('Video loading started')
+        }}
       >
         Your browser does not support the video tag.
       </video>
