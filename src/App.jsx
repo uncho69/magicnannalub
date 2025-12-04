@@ -136,7 +136,7 @@ function App() {
             <p className="about-text">
               Magic Nanna Labs team members have been cooking on the internet long before AI hype cycles and viral threads. We're children of early web culture, self-taught, over-skilled, and battle-tested by years of creating and experimenting.
               <br /><br />
-              Along the way, we've crafted video content for leading <a href="https://x.com/berachain" target="_blank" rel="noopener noreferrer" className="text-link">Berachain</a> projects, delivering visuals that hit hard and stand out across the ecosystem.
+              Along the way, we've crafted video content for leading Web3 projects, delivering visuals that hit hard and stand out across the ecosystem.
               <br /><br />
               <strong>We don't follow templates. We don't recycle styles</strong> Everything we make is crafted from scratch with intention — visuals, edits, animations, SFX, music, pacing, storytelling.
               <br /><br />
