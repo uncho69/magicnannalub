@@ -7,74 +7,82 @@ import nannaLogo from './assets/nobg.png'
 
 function App() {
   const [showAbout, setShowAbout] = useState(false)
+  const [videoReady, setVideoReady] = useState(false)
   const videoRef = useRef(null)
 
   useEffect(() => {
     const video = videoRef.current
     if (!video) return
 
-    // Video sempre muto, senza audio
+    // Imposta video come muto PRIMA di tutto
     video.muted = true
     video.volume = 0
-    
-    // Debug: log quando il video si carica
-    video.addEventListener('loadedmetadata', () => {
-      console.log('Video metadata loaded, duration:', video.duration)
-    })
-    
-    video.addEventListener('canplay', () => {
-      console.log('Video can play')
-    })
-    
-    video.addEventListener('playing', () => {
-      console.log('Video is playing!')
-    })
+    video.setAttribute('muted', '')
     
     const forcePlay = async () => {
       if (video.paused) {
         try {
+          // Assicurati che sia muto prima di play
+          video.muted = true
+          video.volume = 0
           await video.play()
           console.log('Video play() succeeded')
+          setVideoReady(true)
         } catch (error) {
           console.error('Video play() failed:', error)
-          // Riprova se fallisce
-          setTimeout(forcePlay, 200)
         }
       }
     }
     
-    // Prova immediatamente
-    forcePlay()
+    // Prova quando il video è pronto
+    const tryPlay = () => {
+      video.muted = true
+      video.volume = 0
+      forcePlay()
+    }
     
-    // Retry continuo ogni 500ms se è ancora in pausa
-    const retryInterval = setInterval(() => {
-      if (video.paused) {
-        forcePlay()
-      }
-    }, 500)
-    
-    // Prova quando è pronto
-    const tryPlay = () => forcePlay()
     video.addEventListener('loadeddata', tryPlay)
     video.addEventListener('canplay', tryPlay)
     video.addEventListener('canplaythrough', tryPlay)
+    video.addEventListener('loadedmetadata', () => {
+      video.muted = true
+      video.volume = 0
+      tryPlay()
+    })
+    
+    // Prova immediatamente
+    tryPlay()
+    
+    // Retry ogni 300ms se è ancora in pausa
+    const retryInterval = setInterval(() => {
+      if (video.paused) {
+        tryPlay()
+      } else {
+        clearInterval(retryInterval)
+      }
+    }, 300)
     
     // Quando la pagina diventa visibile, riprova
     const handleVisibilityChange = () => {
       if (!document.hidden && video.paused) {
-        forcePlay()
+        tryPlay()
       }
     }
     document.addEventListener('visibilitychange', handleVisibilityChange)
     
-    // Click globale per sbloccare
-    const unlock = () => {
-      if (video.paused) {
-        forcePlay()
-      }
+    // Cattura QUALSIASI interazione per sbloccare il video
+    const unlock = (e) => {
+      e.preventDefault()
+      video.muted = true
+      video.volume = 0
+      forcePlay()
     }
+    
+    // Eventi multipli per mobile
+    document.addEventListener('touchstart', unlock, { once: true, passive: false })
+    document.addEventListener('touchend', unlock, { once: true, passive: false })
     document.addEventListener('click', unlock, { once: true })
-    document.addEventListener('touchstart', unlock, { once: true })
+    document.addEventListener('mousedown', unlock, { once: true })
     
     // Cleanup
     return () => {
@@ -83,14 +91,41 @@ function App() {
       video.removeEventListener('canplay', tryPlay)
       video.removeEventListener('canplaythrough', tryPlay)
       document.removeEventListener('visibilitychange', handleVisibilityChange)
+      document.removeEventListener('touchstart', unlock)
+      document.removeEventListener('touchend', unlock)
+      document.removeEventListener('click', unlock)
+      document.removeEventListener('mousedown', unlock)
     }
   }, [])
 
   // URL del video su Cloudflare R2
   const videoUrl = 'https://pub-40c99f2d54fd492fbef50adca7fecc1b.r2.dev/promo1.mp4'
 
+  const handleOverlayClick = async (e) => {
+    e.preventDefault()
+    const video = videoRef.current
+    if (video && video.paused) {
+      video.muted = true
+      video.volume = 0
+      try {
+        await video.play()
+        setVideoReady(true)
+      } catch (error) {
+        console.error('Video play failed:', error)
+      }
+    }
+  }
+
   return (
     <div className="app">
+      {!videoReady && (
+        <div 
+          className="video-overlay"
+          onTouchStart={handleOverlayClick}
+          onTouchEnd={handleOverlayClick}
+          onClick={handleOverlayClick}
+        />
+      )}
       <video
         ref={videoRef}
         className="background-video"
@@ -99,14 +134,23 @@ function App() {
         loop
         playsInline
         preload="auto"
-        muted
+        muted={true}
         webkit-playsinline="true"
         x5-playsinline="true"
         onLoadedData={(e) => {
+          e.target.muted = true
+          e.target.volume = 0
+          e.target.setAttribute('muted', '')
           e.target.play().catch(() => {})
         }}
         onCanPlay={(e) => {
+          e.target.muted = true
+          e.target.volume = 0
+          e.target.setAttribute('muted', '')
           e.target.play().catch(() => {})
+        }}
+        onPlaying={() => {
+          setVideoReady(true)
         }}
         onError={(e) => {
           console.error('Video error:', e.target.error)
