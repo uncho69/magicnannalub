@@ -17,11 +17,26 @@ function App() {
     video.muted = true
     video.volume = 0
     
+    // Debug: log quando il video si carica
+    video.addEventListener('loadedmetadata', () => {
+      console.log('Video metadata loaded, duration:', video.duration)
+    })
+    
+    video.addEventListener('canplay', () => {
+      console.log('Video can play')
+    })
+    
+    video.addEventListener('playing', () => {
+      console.log('Video is playing!')
+    })
+    
     const forcePlay = async () => {
       if (video.paused) {
         try {
           await video.play()
+          console.log('Video play() succeeded')
         } catch (error) {
+          console.error('Video play() failed:', error)
           // Riprova se fallisce
           setTimeout(forcePlay, 200)
         }
